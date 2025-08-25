@@ -1,4 +1,3 @@
-// src/components/BlogPost.js
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import posts from "../data/posts"; // ✅ same dataset

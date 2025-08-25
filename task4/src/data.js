@@ -1,5 +1,3 @@
-// src/data.js
-
 export const blogPosts = [
   {
     id: 1,

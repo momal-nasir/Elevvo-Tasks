@@ -12,13 +12,13 @@ export default function About() {
 
       <div className="grid md:grid-cols-2 gap-6 mt-8">
         <div className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg transition">
-          <h2 className="text-xl font-semibold mb-2">🚀 Our Mission</h2>
+          <h2 className="text-xl font-semibold mb-2"> Our Mission</h2>
           <p className="text-gray-600">
             To simplify complex tech concepts and make learning enjoyable for everyone.
           </p>
         </div>
         <div className="bg-white shadow-md rounded-xl p-6 hover:shadow-lg transition">
-          <h2 className="text-xl font-semibold mb-2">💡 Why This Blog?</h2>
+          <h2 className="text-xl font-semibold mb-2"> Why This Blog?</h2>
           <p className="text-gray-600">
             Because technology never stops growing — and neither should we.
           </p>
