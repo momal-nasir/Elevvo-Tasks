@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collapsible Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(to bottom, #4e54c8, #8f94fb);
+            color: white;
+            transition: all 0.4s ease;
+            position: fixed;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .sidebar.collapsed {
+            width: 70px;
+        }
+
+        .logo-container {
+            padding: 20px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            height: 80px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #4e54c8;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            margin-left: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.collapsed .logo-text {
+            opacity: 0;
+            width: 0;
+        }
+
+        .nav-links {
+            padding: 20px 0;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid white;
+        }
+
+        .nav-item.active {
+            background: rgba(255, 255, 255, 0.15);
+            border-left: 4px solid white;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-text {
+            margin-left: 15px;
+            overflow: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.collapsed .nav-text {
+            opacity: 0;
+            width: 0;
+        }
+
+        .toggle-btn {
+            padding: 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+        }
+
+        .toggle-icon {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar.collapsed .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            margin-left: 250px;
+            transition: margin-left 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .main-content.expanded {
+            margin-left: 70px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            width: 100%;
+        }
+
+        .page-title {
+            font-size: 28px;
+            color: #333;
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #4e54c8;
+        }
+
+        .welcome-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .welcome-card h2 {
+            color: #4e54c8;
+            margin-bottom: 15px;
+            font-size: 32px;
+        }
+
+        .welcome-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 18px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                left: -250px;
+                width: 250px;
+            }
+            
+            .sidebar.collapsed {
+                left: 0;
+                width: 70px;
+            }
+            
+            .sidebar.mobile-open {
+                left: 0;
+                width: 250px;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .main-content.expanded {
+                margin-left: 0;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+            
+            .overlay.active {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-container">
+            <div class="logo">L</div>
+            <div class="logo-text">LogoHere</div>
+        </div>
+        
+        <div class="nav-links">
+            <div class="nav-item active">
+                <div class="nav-icon"><i class="fas fa-home"></i></div>
+                <div class="nav-text">Dashboard</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fas fa-chart-bar"></i></div>
+                <div class="nav-text">Analytics</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fas fa-envelope"></i></div>
+                <div class="nav-text">Messages</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fas fa-cog"></i></div>
+                <div class="nav-text">Settings</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"><i class="fas fa-user"></i></div>
+                <div class="nav-text">Profile</div>
+            </div>
+        </div>
+        
+        <div class="toggle-btn" id="toggle-btn">
+            <div class="toggle-icon"><i class="fas fa-chevron-left"></i></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <div class="header">
+            <h1 class="page-title">Dashboard</h1>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+        
+        <div class="welcome-card">
+            <h2>Welcome to Your Dashboard</h2>
+            <p>This is a clean and minimal dashboard interface with a collapsible sidebar. Click the toggle button to collapse or expand the sidebar for more screen space.</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('toggle-btn');
+            const mainContent = document.getElementById('main-content');
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const overlay = document.getElementById('overlay');
+            
+            // Toggle sidebar on button click
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+            });
+            
+            // Toggle sidebar on mobile
+            mobileToggle.addEventListener('click', function() {
+                sidebar.classList.add('mobile-open');
+                overlay.classList.add('active');
+            });
+            
+            // Close sidebar when clicking outside on mobile
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('mobile-open');
+                    overlay.classList.remove('active');
+                }
+            });
+            
+            // Add click event to nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // On mobile, close sidebar after selection
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('mobile-open');
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

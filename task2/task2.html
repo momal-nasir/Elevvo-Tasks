@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e1e5ee;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4e54c8;
+            box-shadow: 0 0 0 4px rgba(78, 84, 200, 0.1);
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        button {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 84, 200, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            input,
+            textarea {
+                padding: 12px 12px 12px 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            button {
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Get in Touch</h1>
+            <p>We'd love to hear from you! Send us a message.</p>
+        </div>
+
+        <div class="form-container">
+            <div class="success-message" id="success-message">
+                <i class="fas fa-check-circle"></i> Your message has been sent successfully!
+            </div>
+
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name">
+                    </div>
+                    <div class="error" id="name-error">Please enter your name</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-group">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address">
+                    </div>
+                    <div class="error" id="email-error">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <div class="input-group">
+                        <i class="fas fa-tag"></i>
+                        <input type="text" id="subject" name="subject" placeholder="What is this regarding?">
+                    </div>
+                    <div class="error" id="subject-error">Please enter a subject</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <div class="input-group">
+                        <i class="fas fa-comment"></i>
+                        <textarea id="message" name="message" placeholder="Type your message here..."></textarea>
+                    </div>
+                    <div class="error" id="message-error">Please enter your message</div>
+                </div>
+
+                <button type="submit" id="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('contact-form');
+            const successMessage = document.getElementById('success-message');
+
+            // Get all error elements
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            const subjectError = document.getElementById('subject-error');
+            const messageError = document.getElementById('message-error');
+
+            // Form submission handler
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Reset errors
+                nameError.style.display = 'none';
+                emailError.style.display = 'none';
+                subjectError.style.display = 'none';
+                messageError.style.display = 'none';
+
+                // Get form values
+                const name = document.getElementById('fullname').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value.trim();
+                const message = document.getElementById('message').value.trim();
+
+                // Validate form
+                let isValid = true;
+
+                if (name === '') {
+                    nameError.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (email === '') {
+                    emailError.textContent = 'Please enter your email address';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else if (!isValidEmail(email)) {
+                    emailError.textContent = 'Please enter a valid email address';
+                    emailError.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (subject === '') {
+                    subjectError.style.display = 'block';
+                    isValid = false;
+                }
+
+                if (message === '') {
+                    messageError.style.display = 'block';
+                    isValid = false;
+                }
+
+                // If form is valid, show success message
+                if (isValid) {
+                    successMessage.style.display = 'block';
+                    form.reset();
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }
+            });
+
+            // Email validation function
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            // Real-time validation
+            document.getElementById('fullname').addEventListener('blur', function () {
+                if (this.value.trim() === '') {
+                    nameError.style.display = 'block';
+                } else {
+                    nameError.style.display = 'none';
+                }
+            });
+
+            document.getElementById('email').addEventListener('blur', function () {
+                const emailValue = this.value.trim();
+                if (emailValue === '') {
+                    emailError.textContent = 'Please enter your email address';
+                    emailError.style.display = 'block';
+                } else if (!isValidEmail(emailValue)) {
+                    emailError.textContent = 'Please enter a valid email address';
+                    emailError.style.display = 'block';
+                } else {
+                    emailError.style.display = 'none';
+                }
+            });
+
+            document.getElementById('subject').addEventListener('blur', function () {
+                if (this.value.trim() === '') {
+                    subjectError.style.display = 'block';
+                } else {
+                    subjectError.style.display = 'none';
+                }
+            });
+
+            document.getElementById('message').addEventListener('blur', function () {
+                if (this.value.trim() === '') {
+                    messageError.style.display = 'block';
+                } else {
+                    messageError.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
