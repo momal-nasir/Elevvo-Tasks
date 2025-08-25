@@ -2,29 +2,52 @@
 const posts = [
   {
     id: 1,
-    title: "My First Blog Post",
-    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80",
-    description: "This is a short intro to my first blog post.",
-    content: "Here’s the full content of my first blog post. You can add paragraphs, images, etc.",
-    date: "Aug 23, 2025",
+    title: "Mastering React Basics",
+    image: "https://picsum.photos/800/600?random=1",
+    description: "A beginner-friendly guide to understanding React fundamentals.",
+    content:
+      "React is one of the most popular JavaScript libraries for building user interfaces. In this post, we will cover JSX, components, props, and state management basics.",
+    date: "Aug 21, 2025",
     category: "Tech",
   },
   {
     id: 2,
-    title: "Exploring Travel Destinations",
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-    description: "Sharing my favorite travel spots around the world.",
-    content: "Here’s the full article about traveling to beautiful places.",
+    title: "Exploring Northern Pakistan",
+    image: "https://picsum.photos/800/600?random=2",
+    description: "Sharing my journey across the breathtaking mountains of Pakistan.",
+    content:
+      "From Hunza to Skardu, northern Pakistan is full of majestic landscapes, welcoming people, and unforgettable experiences. This post shares some highlights from my recent trip.",
     date: "Aug 20, 2025",
     category: "Travel",
   },
   {
     id: 3,
-    title: "Best Recipes for Summer",
-    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80",
-    description: "Some refreshing recipes for hot days.",
-    content: "These are the best refreshing recipes for summer!",
+    title: "5-Minute Healthy Breakfasts",
+    image: "https://picsum.photos/800/600?random=3",
+    description: "Quick and easy recipes to kickstart your day with energy.",
+    content:
+      "Breakfast is the most important meal of the day. Here are 5 quick and nutritious recipes that you can make in under 5 minutes.",
+    date: "Aug 19, 2025",
+    category: "Food",
+  },
+  {
+    id: 4,
+    title: "Why Tailwind CSS is a Game Changer",
+    image: "https://picsum.photos/800/600?random=4",
+    description: "Learn how Tailwind CSS makes styling faster and easier.",
+    content:
+      "Tailwind CSS is a utility-first CSS framework that helps developers build modern and responsive designs quickly. Let’s explore its benefits.",
     date: "Aug 18, 2025",
+    category: "Tech",
+  },
+  {
+    id: 5,
+    title: "Street Food Adventures",
+    image: "https://picsum.photos/800/600?random=5",
+    description: "Exploring the taste of local street food around the city.",
+    content:
+      "Street food tells the story of a culture. From spicy snacks to sweet delights, this blog explores the best local food experiences.",
+    date: "Aug 17, 2025",
     category: "Food",
   },
 ];
